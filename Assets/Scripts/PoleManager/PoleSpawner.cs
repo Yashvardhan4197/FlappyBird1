@@ -16,12 +16,19 @@ public class PoleSpawner:MonoBehaviour
     {
         Poles=GameService.Instance.Poles;
         GameService.Instance.StartGameEvent += GameStarted;
+        GameService.Instance.EndGameEvent += GameEnd;
     }
 
     public void GameStarted()
     {
         InvokeRepeating("StartGame",1, 2);
     }
+
+    public void GameEnd()
+    {
+        CancelInvoke("StartGame");
+    }
+
 
     private void StartGame()
     {

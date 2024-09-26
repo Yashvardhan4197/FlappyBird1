@@ -8,11 +8,12 @@ public class PopUpManager
 {
    private GameEndManager gameEndManager;
    private GameStartManager gameStartManager;
-
-    public PopUpManager(GameStartView gameStartView,GameEndView gameEndView)
+   private ScoreController scoreController;
+    public PopUpManager(GameStartView gameStartView,GameEndView gameEndView,ScoreView scoreView)
     {
         gameStartManager = new GameStartManager(gameStartView);
         gameEndManager = new GameEndManager(gameEndView);
+        scoreController = new ScoreController(scoreView);
     }
 
     public void SetUIOpen(CanvasGroup canvasGroup)
@@ -28,4 +29,6 @@ public class PopUpManager
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
+
+    public ScoreController GetScoreController() => scoreController;
 }

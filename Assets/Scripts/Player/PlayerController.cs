@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ public class PlayerController
         this.playerView.SetController(this);
         sprites = playerView.GetPlayerImages();
         GameService.Instance.StartGameEvent += OnGameStart;
+        GameService.Instance.EndGameEvent += OnGameEnd;
+
     }
 
     public void SetPlayer()
@@ -25,6 +28,8 @@ public class PlayerController
     public void OnGameStart()
     {
         playerView.StartAnimation();
+        playerView.gameObject.transform.position = playerView.GetStartPos().position;
+        playerView.gameObject.transform.eulerAngles = playerView.GetStartPos().eulerAngles;
     }
 
     public void StartAnimation()
@@ -53,6 +58,19 @@ public class PlayerController
         rot.z = dir.y * 5;
         playerView.transform.eulerAngles = rot;
 
+    }
+
+    public void OnGameEnd()
+    {
+        playerView.SetIsPlaying(false);
+        playerView.gameObject.transform.position = playerView.GetStartPos().position;
+        playerView.gameObject.transform.eulerAngles = playerView.GetStartPos().eulerAngles;
+        playerView.StopAnimation();
+    }
+
+    public void EndGame()
+    {
+        GameService.Instance.EndGameEvent?.Invoke();
     }
 }
 

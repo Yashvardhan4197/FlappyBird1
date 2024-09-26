@@ -15,6 +15,7 @@ public class GameService : MonoBehaviour
     [SerializeField] GameStartView gameStartView;
     [SerializeField] GameEndView gameEndView;
     [SerializeField] PlayerView playerView;
+    [SerializeField] ScoreView scoreView;
 
     //Data
     [SerializeField] float BgOffset;
@@ -43,11 +44,17 @@ public class GameService : MonoBehaviour
     private void OnEnable()
     {
         Init();
+        EndGameEvent += DestroyPipes;
+    }
+
+    private void OnDisable()
+    {
+        EndGameEvent -= DestroyPipes;
     }
     private void Init()
     {
         bgService = new BackgroundService(bgView,BgOffset,baseView,Baseoffset);
-        PopUpManager = new PopUpManager(gameStartView,gameEndView);
+        PopUpManager = new PopUpManager(gameStartView,gameEndView,scoreView);
         playerController = new PlayerController(playerView);
     }
 

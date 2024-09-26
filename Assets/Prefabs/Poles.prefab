@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 5224381315941571077}
   m_Layer: 0
   m_Name: WinBox
-  m_TagString: Untagged
+  m_TagString: Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

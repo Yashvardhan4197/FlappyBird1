@@ -7,6 +7,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] float gravity;
     [SerializeField] float jumpPower;
     [SerializeField] Sprite[] PlayerSprites;
+    [SerializeField] Transform startPos;
     private bool isPlaying;
 
     private void Start()
@@ -15,8 +16,6 @@ public class PlayerView : MonoBehaviour
     }
 
     private void StartAnimationFromController() => playerController.StartAnimation();
-
-    private voif StopAnimationFromController() => playerController.StopAnimation();
 
     public void SetController(PlayerController playerController)
     {
@@ -57,7 +56,7 @@ public class PlayerView : MonoBehaviour
 
     public void StopAnimation()
     {
-        CancelInvoke("StopAnimationFromController");
+        CancelInvoke("StartAnimationFromController");
     }
 
     public Sprite[] GetPlayerImages() => PlayerSprites;
@@ -66,7 +65,7 @@ public class PlayerView : MonoBehaviour
 
     public float GetJumpPower() {  return jumpPower; }
 
-    //public Rigidbody2D GetRigidbody2D()=>this.gameObject.GetComponent<Rigidbody2D>();
+    public Transform GetStartPos() { return startPos; }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,8 +73,14 @@ public class PlayerView : MonoBehaviour
         
         if (collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("Dead");
+            playerController.EndGame();
         }
+
+        if(collision.gameObject.tag == "Score")
+        {
+            GameService.Instance.GetPopUpService().GetScoreController().IncreaseScore();
+        }
+
     }
 
 }
