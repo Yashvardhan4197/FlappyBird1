@@ -38,9 +38,10 @@ public class PlayerView : MonoBehaviour
     {
         if (isPlaying == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 playerController?.JumpPlayer();
+                GameService.Instance.GetSoundManager().PlaySound(Sound.FLY);
             }
 
             playerController?.Update();
@@ -74,11 +75,13 @@ public class PlayerView : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             playerController.EndGame();
+            GameService.Instance.GetSoundManager().PlaySound(Sound.END);
         }
 
         if(collision.gameObject.tag == "Score")
         {
             GameService.Instance.GetPopUpService().GetScoreController().IncreaseScore();
+            GameService.Instance.GetSoundManager().PlaySound(Sound.SCORE);
         }
 
     }

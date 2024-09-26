@@ -21,13 +21,17 @@ public class GameService : MonoBehaviour
     [SerializeField] float BgOffset;
     [SerializeField] float Baseoffset;
     [SerializeField] public GameObject Poles;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] SoundType[] soundTypes;
     
     //Services
     private BackgroundService bgService;
     private PopUpManager PopUpManager;
     private PlayerController playerController;
+    private SoundManager soundManager;
     public UnityAction StartGameEvent;
     public UnityAction EndGameEvent;   
+
     private void Awake()
     {
         if(instance == null)
@@ -45,10 +49,12 @@ public class GameService : MonoBehaviour
     {
         Init();
         EndGameEvent += DestroyPipes;
+        StartGameEvent += PlayStartSound;
     }
 
     private void OnDisable()
     {
+        StartGameEvent -= PlayStartSound;
         EndGameEvent -= DestroyPipes;
     }
     private void Init()
@@ -56,6 +62,7 @@ public class GameService : MonoBehaviour
         bgService = new BackgroundService(bgView,BgOffset,baseView,Baseoffset);
         PopUpManager = new PopUpManager(gameStartView,gameEndView,scoreView);
         playerController = new PlayerController(playerView);
+        soundManager=new SoundManager(audioSource,soundTypes);
     }
 
     private void DestroyPipes()
@@ -68,10 +75,14 @@ public class GameService : MonoBehaviour
         }
     }
 
+    private void PlayStartSound()=> soundManager.PlaySound(Sound.START);
+
     public PopUpManager GetPopUpService()=> PopUpManager;
 
     public BackgroundService GetBackgroundService()=>bgService;
 
     public PlayerController GetPlayerController() => playerController; 
+
+    public SoundManager GetSoundManager() => soundManager;
 
 }
