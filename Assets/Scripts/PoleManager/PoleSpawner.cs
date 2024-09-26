@@ -2,7 +2,7 @@
 
 public class PoleSpawner:MonoBehaviour
 {
-    private GameObject Poles;
+    public GameObject Poles;
     [SerializeField] Transform SpawnPos;
     [SerializeField] Transform EndPos;
     [SerializeField] int minHeight;
@@ -15,12 +15,12 @@ public class PoleSpawner:MonoBehaviour
     private void Start()
     {
         Poles=GameService.Instance.Poles;
-        GameStarted();
+        GameService.Instance.StartGameEvent += GameStarted;
     }
 
     public void GameStarted()
     {
-        InvokeRepeating("StartGame",1, 1);
+        InvokeRepeating("StartGame",1, 2);
     }
 
     private void StartGame()

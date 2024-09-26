@@ -14,6 +14,7 @@ public class GameService : MonoBehaviour
     [SerializeField] AnimationView bgView;
     [SerializeField] GameStartView gameStartView;
     [SerializeField] GameEndView gameEndView;
+    [SerializeField] PlayerView playerView;
 
     //Data
     [SerializeField] float BgOffset;
@@ -21,9 +22,11 @@ public class GameService : MonoBehaviour
     [SerializeField] public GameObject Poles;
     
     //Services
-    public BackgroundService bgService;
-    public PopUpManager PopUpManager;
-    public PoleSpawner PoleSpawner;
+    private BackgroundService bgService;
+    private PopUpManager PopUpManager;
+    private PlayerController playerController;
+    public UnityAction StartGameEvent;
+    public UnityAction EndGameEvent;   
     private void Awake()
     {
         if(instance == null)
@@ -35,14 +38,33 @@ public class GameService : MonoBehaviour
             Destroy(instance.gameObject);
         }
 
+        
+    }
+    private void OnEnable()
+    {
         Init();
     }
-
     private void Init()
     {
         bgService = new BackgroundService(bgView,BgOffset,baseView,Baseoffset);
         PopUpManager = new PopUpManager(gameStartView,gameEndView);
-        PoleSpawner = new PoleSpawner(Poles);
+        playerController = new PlayerController(playerView);
     }
+
+    private void DestroyPipes()
+    {
+        PoleView[] Objects= FindObjectsOfType<PoleView>();
+
+        for(int i = 0; i < Objects.Length; i++)
+        {
+            Destroy(Objects[i].gameObject);
+        }
+    }
+
+    public PopUpManager GetPopUpService()=> PopUpManager;
+
+    public BackgroundService GetBackgroundService()=>bgService;
+
+    public PlayerController GetPlayerController() => playerController; 
 
 }

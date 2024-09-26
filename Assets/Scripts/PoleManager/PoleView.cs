@@ -7,9 +7,9 @@ public class PoleView : MonoBehaviour
     [SerializeField] Transform UpPole;
     [SerializeField] Transform DownPole;
     [SerializeField] float speed;
-    [SerializeField] int gap;
-    private float rightPos;
+    [SerializeField] float gap;
     private float leftPos;
+
     private void Start()
     { 
         UpPole.position += Vector3.up* gap;
@@ -25,7 +25,5 @@ public class PoleView : MonoBehaviour
         }
         transform.position+=Vector3.left*Time.deltaTime*speed;
     }
-
-    public void SetRightSide(float rightPos) => this.rightPos = rightPos;
     public void SetLeftSide(float leftPos)=>this.leftPos = leftPos;
 }
