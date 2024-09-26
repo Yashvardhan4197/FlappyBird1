@@ -15,7 +15,8 @@ This is a Flappy Bird clone built using Unity with clean, scalable architecture 
  - **Observer Pattern** : Used Unity Actions to add loose dependency among services
 ---
 ## ScreenShots
-![Screenshot 2024-09-26 161233](https://github.com/user-attachments/assets/58be156e-4a15-47e7-9f72-860bdb507feb)
-![Screenshot 2024-09-26 161257](https://github.com/user-attachments/assets/b719ec87-08a7-4542-9dd5-312bf75b1fbb)
-![Screenshot 2024-09-26 161345](https://github.com/user-attachments/assets/b34c1fc4-284d-4b8a-8f89-90ad8e02c8f3)
+![Screenshot 2024-09-26 161257](https://github.com/user-attachments/assets/dd719c01-4ef5-4bb8-8d8f-3cf5a2815d5e)
+![Screenshot 2024-09-26 161345](https://github.com/user-attachments/assets/a75bb1e4-200b-4b81-b115-39c77e749022)
+![Screenshot 2024-09-26 161233](https://github.com/user-attachments/assets/fcead9dd-b361-4121-8387-ed56b7164877)
+
 
